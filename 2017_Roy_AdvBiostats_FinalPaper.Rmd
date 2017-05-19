@@ -1,0 +1,402 @@
+---
+title: Modeling the Effects of a Range Expanding Fiddler Crab on Ecosystem Services
+  in the Plum Island Marsh - A Bayesian Qualitative Approach
+author: "Michael Roy"
+date: "5/18/2017"
+output: word_document
+---
+
+Introduction:
+	Historically, the range of the marsh fiddler crab Uca pugnax extended from Florida to the southern coast of Cape Cod Massachusetts (Sanford et al. 2006, Johnson 2014).  However, Sanford et al. (2006) found individuals in Scituate MA in 2003, which was the first time U. pugnax had ever been reported north of Cape Cod.  By 2014, the crab had migrated as far north as Hampton New Hampshire (Johnson 2014).  Johnson (2014) also found ovigerous females as far north as Rowley MA, indicating a viable, breeding population in that location.  This range expansion is of particular interest due to the unique life history of U. pugnax.  A burrowing and deposit feeding species of crab, it is constantly reworking the top 2-3 cm of low marsh sediment (Katz 1980, Bertness and Miller 1984, Bertness 1985).  Subsequently, the marsh fiddler crab is an important ecosystem engineer, and has the capacity to influence root growth of the smooth marsh grass Spartina alterniflora, soil oxygenation rates, soil drainage, decomposition rates, belowground meiofaunal densities, sediment attenuation, primary production or other key ecosystem services that resident marsh species depend on for growth and persistence (Bertness and Miller 1984, Bertness 1985).
+	Therefore, I asked the question, how does the novel expansion of the fiddler crab Uca pugnax impact key salt marsh ecosystem services (ES) and the species that depend on these services in the Plum Island Marsh?  The two ES’s analyzed for this study were Sediment Attenuation and Primary Production.  These two supporting services were chosen in particular because they establish the ecological foundation to which many other marsh species rely upon for survival (Costanza et al. 1997, de Groot et al. 2010).  To answer our research question, we used the qualitative Bayesian Framework developed by Melbourne-Thomas et al. (2012).  Their framework (described in greater detail in the next section) incorporates the sign structure of a Jacobian matrix as the model parameters and randomly assigned eigenvalues to each parameter, which has the power to model future scenarios of ecological interactions qualitatively.  This is a powerful tool because future scenarios of how the world will work can be modeled based solely on known positive and negative interactions between species; there is no need to quantify specific interactions.  Therefore, The goal of this paper is to qualitatively model interactions between resident species, an ecosystem service, and a press perturbation (in this case the presence of the marsh fiddler crab) in order to understand how the press perturbation of fiddler crabs will impact resident species and the ecosystem service of interest. 
+
+Methods:
+A Qualitative Bayesian Approach
+	The framework developed by Melbourne-Thomas et al. (2012) is ideal to achieve the goal of this paper because it 1) explicitly defines how the model is built 2) utilizes a sign directed graph (signed digraph) to model interactions between variables, 3) encompasses a community matrix where the signs of the interaction coefficients predict the systems 
+	
+``` {r, echo = FALSE, eval = TRUE, cache =TRUE, message = FALSE, warning = FALSE}
+library(grid)
+library(png)
+
+img1 <- readPNG("/Users/Twotowrs/Documents/Academics/UMB/PhD II/Spring 2017/Biostats II/Biostats Final/Final/Images/First_Half.png")
+grid.raster(img1)
+
+img2 <- readPNG("/Users/Twotowrs/Documents/Academics/UMB/PhD II/Spring 2017/Biostats II/Biostats Final/Final/Images/Second_Half.png")
+grid.raster(img2)
+```
+
+response to a perturbation, 4) incorporates both model structure uncertainty and parameter uncertainty, 5) allows for multiple scenarios of perturbation to be modeled to effectively make comparisons of future scenarios, and 6) utilizes a Bayesian inferential engine that simulates positive, negative, or no impacts of the press perturbation to the variables of interest.   This last point is critical because it ties all other aspects together and allows for ease of model modification as new information and data of the system are obtained.  
+  The following describes in detail the procedure to develop these models.  For a schematic of each step, see Figure 1 from Melbourne-Thomas et al. (2012).
+
+Sign Directed Graph
+	A sign directed graph (SDG, or signed digraph) is a series of nodes connected by interacting lines that indicate whether the interaction between two nodes is positive, negative, or neutral.  It achieves this by assigning arrows as a positive interaction, closed circles as a negative interaction, and a solid line as neutral or no impact.  This model structure is similar to that of conditional relationships between variables within directed acyclic graphs (DAGs) in Bayesian Belief Networks (Hosack et al. 2008, Novak et al. 2011).  However, SDGs differ because they allow for the incorporation of feedback loops, which is important in this study because many species within our network (see section Building the Models for the Study below) have both positive and negative feedback loops (see Figures 2A and 2B).  In addition, model uncertainty is incorporated in this framework by using dashed lines between nodes.  The SDG for this study was built using the modeling software Dia, developed by Melbourne-Thomas et al. (2012) and runs on the XQuartz interface (2016 X.org Foundation, Inc.)
+
+Building the Signed Digraphs for this Study
+  We present two models (i.e. two signed digraphs), each depicting the interactions between our press perturbation and ecosystem services.  For the first model, I track the effect of U. pugnax on the service of Sediment Attenuation and for the second, I track the effect of U. pugnax on the service of Primary Production (See Figure 2A and 2B).  The rationale for choosing these two ecosystem services will be discussed in greater detail in the next paragraph.  The species I used when building this model are Spartina alterniflora (hereafter written as Spartina), the European Green Crab Carcinus maenas, the ribbed mussel Geukensia demissa, the striped bass Morone saxatilis, the mummichog Fundulus heteroclitus, the Eastern marsh snail Melampus bidentatus, suspended algae, and the fiddler crab Uca pugnax (see Figure x).  I chose these particular species for this model because they fit three main criteria 1) they are typical and common species found in the Plum Island Marsh, 2) they are likely to be impacted by a alteration in Sediment Attenuation and Primary Production, and 3) they center around two important species for commercial purposes: the striped bass for recreational fishing and the green crab for its impact on mussel populations. 
+  In addition, we developed four scenarios of future potential impacts of the fiddler crab on the Plum Island Marsh: A scenario where fiddler crabs negatively impact Sediment Attenuation, a scenario where fiddler crabs positively impact Sediment Attenuation, a scenario where fiddler crabs negatively impact Primary Production, and a scenario where fiddler crabs positively impact Primary Production.  This was performed because it is uncertain how fiddler crabs will impact the marsh overall.  Bertness (1985) suggested that fiddler crabs aerate the soil, thus providing more oxygen for roots and enhancing root growth.  Conversely, Spartina is a rhizome forming plant, which if one rhizome is disrupted, it could result in mortality to all other shoots connected to that rhizome (Bertness 1985, 1991).  This alternative hypothesis could result in disrupted root systems, reducing the capacity of Spartina to hold in sediments and reducing available primary production.  It is for these reasons why I chose Sediment Attenuation and Primary Production as my focal ecosystem services because they are highly likely to be impacted either positively or negatively by the presence of the fiddler crab.
+
+Simulating the World
+	To run the simulations, I followed the following steps, which incorporates the process for developing the model as well the associated Bayesian model specifications as outlined in Melbourne-Thomas et al. (2012).  All simulations were performed in R version 3.3.2.  
+
+Setting the scene before running the simulations:
+1)	I used the function model.dia from the package “QPress” to read my Dia created signed directed graphs into R (see code in Appendix I).  Model.dia converts the digraph into a data frame of interactions (i.e. From Sediment Attenuation To Striped Bass) and lists whether each interaction was positive or negative.  
+
+2)	I used the function adjacency.matrix (also in the “QPress package) to create and examine the adjacency matrix, which indicates the signs of each interaction in a matrix of 0s and 1s (0 is no interaction, -1 a negative interaction, and +1 a positive interaction).  This is equivalent to the alphas in the Qualitatively Specified Community Matrix shown in step one of Figure x.  It is essentially a Jacobian matrix that indicates the signs of each interaction qualitatively using matrix algebra and the specifications indicated in the signed directed graph.
+
+3)	I then created the community matrix, which assigns random magnitudes between 0 and 1 to each non-zero value represented in the adjacency matrix.  
+
+4)	To validate the system against any known interactions ecologically, the model needs two pieces of information.  First, the node that is causing the perturbation is defined (in this case fiddler crabs).  Second, any known definitive positive and/or negative interactions are indicated explicitly.  For example, Melbourne-Thomas et al. (2012) describe a study conducted by Raymond et al. (2011) where the perturbation was the presence of rabbits (which was assigned a positive value), which were known to negatively impact tall tussock vegetation (which was assigned a negative value).  However, nothing is known yet of how fiddler crabs will positively or negatively impact the Plum Island Marsh, so the only validation criteria added for this system is the presence of fiddler crabs.
+
+5)	Lastly, I defined the conditions for the perturbation scenario.  To model a negative effect of fiddler crabs on Sediment Attenuation and Spartina, I assigned each a value of -1, and a +1 to fiddler crabs as the variable being added to the system.  To model a positive effect of the fiddler crabs on Sediment Attenuation and Spartina, I simply changed the assignment for each to +1, leaving fiddler crabs at +1 as well (see code Appendix I).  This same procedure was performed for simulations using Primary Production.
+
+Running the simulations:
+	All simulations were run using “while-loops”, which are similar in structure and design to “for-loops” except they only will run if your model fits very specific criteria.  In this case, the criteria are defined in step 4 under validation.  The following is the procedure for running 10000 iterations that simulate all possible scenarios of my models:
+
+1)	For each iteration, a subset of uncertain linkages (represented in the digraph as dashed lines) is randomly removed from the overarching model.  The prior model probabilities are the probabilities that certain linkages are selected over others.  
+
+2)	Sampling from the pre-specified community matrix in step 3 above generates a community matrix, which corresponds to the randomly selected model above.  The sampling distribution (values between 0 and 1) generates the prior distribution of the model parameters.
+
+3)	To assess the stability of the generated matrix and randomly selected digraph, the model generates eigenvalues of the study system.  If unstable, the matrix and digraph are removed, and the process starts over again.  
+
+4)	To validate, the model draws from the information given in step 4 above, which is based on known interactions between the press perturbation node and other nodes in the system.  For our system, we essentially provide the equivalent of a flat prior in the validation step, and do not indicate whether fiddler crabs positively or negatively impact any other node within the model.  If predictions are made that are not consistent with the validation criteria, the model is removed, and again the process starts over again at step 1.  The likelihood therefore is defined as p(y | theta, M), where y is given by the observation that the model is stable and has been validated, theta is the parameter value given from the community matrix, and M is just an indicator that keeps track of each model iteration.
+
+5)	Finally, the perturbation scenario is included, and the stable and validated matrix is then used to make predictions about the response of all other nodes to the press perturbation for all iterations, and represents the posterior model predictions.  The results from all 10000 iterations are pooled, and represented in prediction space as proportions positively affected, negatively affected, or unaffected across all simulations (see Figures 3A-D).
+
+Further Validation
+	To validate whether the interactions between species and each ecosystem service are an accurate depiction of interactions in nature, I conducted a brief literature review.  For connections linking striped bass to other nodes, striped bass has been shown to feed upon both green crabs (Ryland Taylor, pers. comm.), and mummichogs (Tupper and Able 2000), and may consume fiddler crabs.  However, this link is dashed because they occupy different areas of the marsh (fiddlers on the creek edge and striped bass on the creek bed), and represents uncertainty of their interactions.  Mummichogs frequently consume Melampus snails (Packer 2001), which Melampus in turn frequently grazes on Spartina and decomposing Spartina shoots (Graça et al. 2000).  
+  For connections linking green crabs to other nodes, green crabs are known to primarily consume mussels (Griffen 2011), which are filter feeding invertebrates that often consume suspended algae (Wright et al. 1982).  In addition, mussels can aid in Spartina settlement by forming dense mats in the mud helping to maintain Spartina root structure and stability (Marc Hensel, pers. comm.).  Lastly, the effect of fiddler crabs on each node is uncertain; therefore all linkages from the fiddler crab to other nodes are all dashed signifying this uncertainty.  These connections are relevant for both ecosystem services as they are maintained between the two models; however, there is one key difference.  For Primary Production (PP), there is a link between algae and PP because algae are a key component to primary productivity; there is no link between algae and Sediment Attenuation.
+
+Results:
+
+Sediment Attenuation
+	Under scenario 1a (fiddler crabs negatively impacting Spartina and Sediment Attenuation), algae showed the highest proportion of positive iterations (see Figure 3A).  In contrast, mummichogs, Spartina, ribbed mussels, striped bass, Melampus, and Sediment Attenuation all showed relatively high proportions of negative effects to these nodes (higher than 0.75, see Figure x).  In addition, Sediment Attenuation had the highest proportion of negative iterations with nearly all scenarios showing a negative impact (9946 iterations out of 10000).  Intriguingly, green crabs and fiddler crabs both exhibited relatively equal proportions of positive and negative iterations under this scenario.  This model uncertainty indicates that it is unclear what the presence of the fiddler crab will have on both green crabs and how this will impact their own populations.  Overall, however, the model suggests that when Fiddler crabs have a negative impact on Spartina and Sediment Attenuation, most species experience a negative impact.
+  Interestingly, under scenario 1b (fiddler crabs positively impacting Spartina and Sediment Attenuation), the exact reverse occurs.  Striped bass, Sediment Attenuation, Melampus, fiddler crabs, and ribbed mussels all exhibited the highest proportions of positive iterations (see Figure 3B).  In contrast, algae exhibited the highest proportion of negative interactions, a complete turnaround from scenario 1a.  Green crabs were mostly unchanged in this scenario, representing about even proportions of success and loss under this scenario.  This indicates that regardless of how fiddler crabs impact Spartina and the ecosystem service of Sediment Attenuation, it is unclear how green crabs will respond to this new crab species.  In addition ribbed mussel, Spartina and mummichogs showed relatively high proportions of positive iterations (>0.60), so likely are unaffected in this scenario.  However, this scenario shows relatively high proportions of positive iterations for all species save for algae and green crabs.
+
+Primary Production
+	Under scenario 2a (fiddler crabs have a negative impact on Spartina and Primary Production), Algae and Fiddler crabs have the two highest proportions of positive iterations (~0.10 and ~0.15 respectively, see Figure 3C).  Green crabs also a showed relatively high proportion of positive iterations (0.60).  However, striped bass, mummichogs, ribbed mussels, Melampus, Spartina, and Primary Production all showed high proportions of negative iterations in the presence of fiddler crabs under this scenario (>0.75, see Figure 3C).  It is not surprising that Melampus showed the highest proportion of negative impacts (~0.95) given that a disruption to its food source in the low marsh (decomposing and live Spartina shoots) likely has a direct negative impact to the species.  Overall, a negative impact to Spartina and Primary Production results in negative impacts to all species in the low marsh save for algae and green crabs (which relies much less heavily on Spartina than algae as a foundation species).  
+Additionally, scenario 2b (the model depicting the effects of fiddler crabs on Primary Production) shows the same flipped response as in the model for Sediment Attenuation (see Figure 3D).  Under this scenario (fiddler crabs positively impact Spartina and Primary production), fiddler crabs, striped bass, Melampus, ribbed mussels, and Primary Production, and mummichogs all showed a high proportion of positive impacts in the presence of fiddler crabs (>0.75, see Figure 3D).  The two nodes with the highest number of negative iterations were green crabs and algae.  
+
+``` {r, echo = FALSE, eval = TRUE, cache =TRUE, message = FALSE, warning = FALSE}
+library(grid)
+library(png)
+
+img3 <- readPNG("/Users/Twotowrs/Documents/Academics/UMB/PhD II/Spring 2017/Biostats II/Biostats Final/Final/Images/marsh_SA.png")
+grid.raster(img1)
+
+img4 <- readPNG("/Users/Twotowrs/Documents/Academics/UMB/PhD II/Spring 2017/Biostats II/Biostats Final/Final/Images/marsh_PP_3_GC.png")
+grid.raster(img2)
+```
+
+``` {r, echo = FALSE, eval = TRUE, cache =TRUE, message = FALSE, warning = FALSE}
+library(grid)
+library(png)
+
+img5 <- readPNG("/Users/Twotowrs/Documents/Academics/UMB/PhD II/Spring 2017/Biostats II/Biostats Final/Final/Images/1.png")
+grid.raster(img1)
+
+img6 <- readPNG("/Users/Twotowrs/Documents/Academics/UMB/PhD II/Spring 2017/Biostats II/Biostats Final/Final/Images/2.png")
+grid.raster(img2)
+
+img7 <- readPNG("/Users/Twotowrs/Documents/Academics/UMB/PhD II/Spring 2017/Biostats II/Biostats Final/Final/Images/3.png")
+grid.raster(img1)
+
+img8 <- readPNG("/Users/Twotowrs/Documents/Academics/UMB/PhD II/Spring 2017/Biostats II/Biostats Final/Final/Images/4.png")
+grid.raster(img2)
+```
+
+
+Discussion:
+	The reversal of responses observed between scenarios 1 and 2 for both ecosystem service models is somewhat unexpected.  However, it likely represents a weak interaction between algae and the rest of the system.  Given that the only difference between the two models is a connection between algae and the ecosystem service for Primary Production and the lack of a link between algae and Sediment Attenuation, it likely indicates that link is not strongly influencing the dynamics of the system, at least in the presence of the particular press perturbation of interest (fiddler crabs).  In addition, for three out of the four scenarios, green crabs showed high uncertainty in response to a fiddler crab perturbation.  Green crabs are highly resilient non-resident species that adapt well to changing environments and stress (Griffen 2011, Blakeslee et al. 2015).  Therefore, the model I present likely represents actual interactions in nature, and will be important to keep in mind when tracking the effect of fiddler crabs on green crabs in the future.
+	Another interesting finding comes from scenario 1a, negative impacts of fiddler crabs on Sediment Attenuation and Spartina.  Here, fiddler crabs did not benefit outright from their expansion into Plum Island.  Instead, there were roughly half of all iterations that showed a negative impact of fiddler crabs to their presence in the marsh as it relates to a reduced attenuation of sediments.  However, this makes sense; reduced capacity for Spartina to hold in sediment will not only harm resident species, fiddler crabs also will also likely lose from this scenario.  Indeed, Bertness (1985) describe the low marsh as the ideal location for fiddler crabs to inhabit because the root system is not too dense where it becomes difficult to burrow (as in the high marsh), and the sediment is not too loose as to increase burrow instability (as in the creek wall).  Therefore, it will be interesting to see if the fiddler crabs reach a carrying capacity at abundances lower than in ‘native’ habitats as the number of fiddler crabs increase through time.  It will be depend largely on how Plum Island responds to the presence of the fiddler crab as it compares to interactions its ‘native’ ranges south of Cape Cod. 
+	Additionally, these models do not indicate complete collapse of Spartina mats and ecosystem services with the presence of fiddler crabs.  Despite indicating in the model that the presence of fiddler crabs will negatively impact Spartina, the model does show instances where Spartina benefits (782 iterations for the model with Primary Production, and 2244 for the model with Sediment Attenuation).  However, there is a relatively high degree of probability that Spartina will not fare well with the presence of fiddler crabs if they prove to negatively impact Spartina and these two ecosystem services broadly.
+	Lastly, these models answer my research question of how novel expansions of the fiddler crab Uca pugnax impact key salt marsh ecosystem services (ES) and the species that depend on these services in the Plum Island Marsh.  However, much uncertainty still persists.  For example, it is unknown to what degree the role of mussels plays in maintaining Spartina densities in Plum Island.  In addition, perhaps fiddler crabs destroying Spartina roots and subsequent die-off of shoots result in greater root and shoot detritus, and therefore a boon for Melampus.  If this does prove true, the ~95 proportion of negative iterations of Melampus in the model depicting Primary Production could flip entirely, influencing other dynamics within the model.  
+The benefit to using this modeling framework, however is that with all new information, the model can be modified and built upon.  I provided extremely flat priors to the model, which likely contributes to model uncertainty.  It will be critical to continue updating these models as new information arises to best predict and anticipate the effect of this novel ecosystem engineer on salt marsh dynamics.  Indeed, the proposed mechanism of expansion is warming temperatures in the Gulf of Maine allowing fiddler propagules to survive northern clines (Johnson 2014, Pershing et al. 2015).  These models may prove important in predicting community responses to this expansion as the Gulf of Maine continues to warm and more information is revealed as to the exact extent the marsh fiddler crab expands ever northward.  
+
+References:
+Bertness, M. D. 1985. Fiddler Crab Regulation of Spartina alterniflora Production on a New England Salt Marsh. Ecology 66:1042–1055.
+Bertness, M. D. 1991. Zonation of Spartina Patens and Spartina Alterniflora in New England Salt Marsh. Ecology 72:138–148.
+Bertness, M. D., and T. Miller. 1984. The distribution and dynamics of Uca pugnax (Smith) burrows in a New England salt marsh. J. Exp. Mar. Biol. Ecol. 83:211–237.
+Blakeslee, A. M. H., C. L. Keogh, A. E. Fowler, and B. D. Griffen. 2015. Assessing the effects of trematode infection on invasive green crabs in eastern North America. PLoS ONE 10:1–20.
+Costanza, R., R. d’Arge, R. de Groot, S. Farber, M. Grasso, B. Hannon, K. Limburg, S. Naeem, R. V. O’Neill, J. Paruelo, R. G. Raskin, P. Sutton, and M. van den Belt. 1997. The value of the world’s ecosystem services and natural capital. Nature 387:253–260.
+Graça, M. A., S. Y. Newell, and R. T. Kneib. 2000. Grazing rates of organic matter and living fungal biomass of decaying Spartina alterniflora by three species of salt-marsh invertebrates. Marine Biology 136:281–289.
+Griffen, B. D. 2011. Ecological impacts of replacing one invasive species with another in rocky intertidal areas. Invading Nature - Spring Series in Invasion Ecology 6:687–701.
+de Groot, R. S., R. Alkemade, L. Braat, L. Hein, and L. Willemen. 2010. Challenges in integrating the concept of ecosystem services and values in landscape planning, management and decision making. Ecological Complexity 7:260–272.
+Hosack, G. R., K. R. Hayes, and J. M. Dambacher. 2008. Assessing model structure uncertainty through an analysis of system feedback and Bayesian networks. Ecological Applications 18:1070–1082.
+Johnson, D. S. 2014. Fiddler on the Roof: A Northern Range Extension for the Marsh Fiddler Crab Uca Pugnax. Journal of Crustacean Biology 34:671–673.
+Katz, L. C. 1980. Effects of burrowing by the fiddler crab, Uca pugnax (Smith). Estuarine and Coastal Marine Science 11:233–237.
+Melbourne-Thomas, J., S. Witherspoon, B. Raymond, and A. J. Constable. 2012. Comprehensive evaluation of model uncertainty in qualitative network analyses. Ecological Monographs 82:505–519.
+Novak, M., J. T. Wootton, D. F. Doak, M. Emmerson, J. Estes, and M. T. Tinker. 2011. Predicting community responses to perturbations in the face of imperfect knowledge and network complexity. Ecology 92:836–846.
+Packer, D. B. 2001. Assessment and Characterization of Salt Marshes in the Arthur Kill ( New York and New Jersey ) Replanted after a Severe Oil Spill. NOAA Technical Memorandum NMFS-NE-167:1–218.
+Pershing, A. J., M. A. Alexander, M. Christina, L. A. Kerr, A. Le Bris, K. E. Mills, J. A. Nye, N. R. Record, H. A. Scannell, D. Scott, G. D. Sherwood, and A. C. Thomas. 2015. Slow adaptation in the face of rapid warming leads to collapse of the Gulf of Maine cod fishery. Sciencexpress:1–8.
+Raymond, B., J. McInnes, J. M. Dambacher, S. Way, and D. M. Bergstrom. 2011. Qualitative modelling of invasive species eradication on subantarctic Macquarie Island. Journal of Applied Ecology 48:181–191.
+Sanford, E., S. B. Holzman, R. A. Haney, D. M. Rand, and M. D. Bertness. 2006. Larval tolerance, gene flow, and the northern geographic range limits of fiddler crabs. Ecology 87:2882–2894.
+Tupper, M., and K. W. Able. 2000. Movements and food habits of striped bass (Morone saxatilis) in Delaware Bay (USA) salt marshes: comparison of a restored and reference marsh. Marine Biology 137:1049–1058.
+Wright, R. T., R. B. Coffin, C. P. Ersing, and D. Pearson. 1982. Field and laboratory measurements of bivalve filtration of natural marine bacterioplankton. Limnology and Oceanography 27:91–98.
+
+Appendix I
+
+The following is code for Sediment Attenuation.  For Primary Production, it is the same code except with the file Marsh_PP_3_GC loaded into model.dia, and instead of all instances of “Sediment Attenuation”, instead it is “Primary Production”.
+
+```{r Negative Scenario - Sediment Attenuation, cache=TRUE, eval=FALSE}
+#Load in the source code to upload a dia file and the code to create a community matrix
+source("dia.r")
+source("community.r")
+
+## Read model specification for model comparison with the ecosystem service of sediment 
+#attenuation (SA)
+edges_SA <- QPress::model.dia("marsh_SA.dia")
+
+## Examine unweighted adjacency matrix
+Adj_Matrix <- adjacency.matrix(edges_SA)
+Adj_Matrix
+
+## Adjaceny Matrix looks good, now use the function to generate the community matrix
+Com_Matrix <- community.sampler(edges_SA)
+
+## Now create a function to check the validation condition.  In this case, the validation conditions of this model includes the novel perturbation of Fiddler Crabs and negative effects of the FC on Spartina and Sediment Attenuation
+press <- press.validate(edges_SA,
+                        perturb=c("Fiddler Crab" = 1),
+                        monitor=c("Fiddler Crab" = 1))
+
+## Function to define the perturbation scenario
+impact <- press.impact(edges_SA, perturb = c("Fiddler Crab" = 1,
+                                             "Sediment Attenuation" = -1,
+                                             "Spartina" = -1)) 
+
+## Use 10000 simulations
+n.sims <- 10000
+results <- 0
+i <- 0
+while(i < n.sims) {
+  
+  ## Randomly choose edges to retain
+  z <- Com_Matrix$select(runif(1))
+  
+  ## Sample community matrix
+  W <- Com_Matrix$community()
+  
+  ## Check press condition and stability
+  if(!(press(W) && stable.community(W))) next
+  
+  ## Monitor impact post press
+  imp <- impact(W)
+  results <- results + outer(sign(imp),-1:1,'==')
+  i <- i+1
+}
+
+## Print results
+rownames(results) <- levels(edges_SA$From)
+colnames(results) <- c('-','0','+')
+results
+
+```
+
+```{r r plotted outcomes for negative scenario - Sediment Attenuation, cache=TRUE,eval=FALSE}
+## Plot outcomes
+library(RColorBrewer)
+pal <- brewer.pal(n=5,"RdBu")[4:2]
+opar <- par(mar=c(5,10,5,5)+0.1)
+prop <- results/rowSums(results)
+r <- colSums(t(prop)*(-1:1))
+barplot(t(prop[order(r),]),
+        horiz=T,cex.names=0.9,cex.axis=0.9,las=2,border=F,col=pal,xlab="Proportion")
+
+```
+
+```{r Positive Scenario - Sediment Attenuation, cache=TRUE, eval=FALSE}
+#Load in the source code to upload a dia file and the code to create a community matrix
+source("dia.r")
+source("community.r")
+
+## Read model specification for model comparison with the ecosystem service of sediment 
+#attenuation (SA)
+edges_SA <- QPress::model.dia("marsh_SA.dia")
+
+## Examine unweighted adjacency matrix
+Adj_Matrix <- adjacency.matrix(edges_SA)
+Adj_Matrix
+
+## Adjaceny Matrix looks good, now use the function to generate the community matrix
+Com_Matrix <- community.sampler(edges_SA)
+
+## Now create a function to check the validation condition.  In this case, the validation conditions of this model includes the novel perturbation of Fiddler Crabs and negative effects of the FC on Spartina and Sediment Attenuation
+press <- press.validate(edges_SA,
+                        perturb=c("Fiddler Crab" = 1),
+                        monitor=c("Fiddler Crab" = 1))
+
+## Function to define the perturbation scenario
+impact_Pos <- press.impact(edges_SA, perturb = c("Fiddler Crab" = 1,
+                                             "Sediment Attenuation" = 1,
+                                             "Spartina" = 1)) 
+
+## Use 10000 simulations
+n.sims <- 10000
+results <- 0
+i <- 0
+while(i < n.sims) {
+  
+  ## Randomly choose edges to retain
+  z <- Com_Matrix$select(runif(1))
+  
+  ## Sample community matrix
+  W <- Com_Matrix$community()
+  
+  ## Check press condition and stability
+  if(!(press(W) && stable.community(W))) next
+  
+  ## Monitor impact post press
+  imp <- impact_Pos(W)
+  results <- results + outer(sign(imp),-1:1,'==')
+  i <- i+1
+}
+
+## Print results
+rownames(results) <- levels(edges_SA$From)
+colnames(results) <- c('-','0','+')
+results
+
+```
+
+```{r plotted outcomes for positive scenario - Sediment Attenuation, cache=TRUE,eval=FALSE}
+## Plot outcomes
+library(RColorBrewer)
+pal <- brewer.pal(n=5,"RdBu")[4:2]
+opar <- par(mar=c(5,10,5,5)+0.1)
+prop <- results/rowSums(results)
+r <- colSums(t(prop)*(-1:1))
+barplot(t(prop[order(r),]),
+        horiz=T,cex.names=0.9,cex.axis=0.9,las=2,border=F,col=pal,xlab="Proportion")
+
+```
+
+```{r Negative Scenario - Primary Production, cache=TRUE,eval=FALSE}
+#Load in the source code to upload a dia file and the code to create a community matrix
+source("dia.r")
+source("community.r")
+
+## Read model specification for model comparison with the ecosystem service of sediment 
+#attenuation (SA)
+edges_PP_3_GC <- QPress::model.dia("marsh_PP_3_GC.dia")
+
+## Examine unweighted adjacency matrix
+Adj_Matrix <- adjacency.matrix(edges_PP_3_GC)
+Adj_Matrix
+
+## Adjaceny Matrix looks good, now use the function to generate the community matrix
+Com_Matrix <- community.sampler(edges_PP_3_GC)
+
+## Now create a function to check the validation condition.  In this case, the validation conditions of this model includes the novel perturbation of Fiddler Crabs and negative effects of the FC on Spartina and Sediment Attenuation
+press <- press.validate(edges_PP_3_GC,
+                        perturb=c("Fiddler Crab" = 1),
+                        monitor=c("Fiddler Crab" = 1))
+
+## Function to define the perturbation scenario
+impact <- press.impact(edges_PP_3_GC, perturb = c("Fiddler Crab" = 1,
+                                                  "Spartina" = -1,
+                                                  "Primary Production" = -1))
+
+## Use 10000 simulations
+n.sims <- 10000
+results <- 0
+i <- 0
+while(i < n.sims) {
+  
+  ## Randomly choose edges to retain
+  z <- Com_Matrix$select(runif(1))
+  
+  ## Sample community matrix
+  W <- Com_Matrix$community()
+  
+  ## Check press condition and stability
+  if(!(press(W) && stable.community(W))) next
+  
+  ## Monitor impact post press
+  imp <- impact(W)
+  results <- results + outer(sign(imp),-1:1,'==')
+  i <- i+1
+}
+
+## Print results
+rownames(results) <- levels(edges_PP_3_GC$From)
+colnames(results) <- c('-','0','+')
+results
+```
+
+```{r plotted outcomes for negative scenario - Primary Production, cache=TRUE,eval=FALSE}
+## Plot outcomes
+library(RColorBrewer)
+pal <- brewer.pal(n=5,"RdBu")[4:2]
+opar <- par(mar=c(5,10,5,5)+0.1)
+prop <- results/rowSums(results)
+r <- colSums(t(prop)*(-1:1))
+barplot(t(prop[order(r),]),
+        horiz=T,cex.names=0.9,cex.axis=0.9,las=2,border=F,col=pal,xlab="Proportion")
+
+```
+
+```{r Positive Scenario - Primary Production, cache=TRUE,eval=FALSE}
+#Load in the source code to upload a dia file and the code to create a community matrix
+source("dia.r")
+source("community.r")
+
+## Read model specification for model comparison with the ecosystem service of sediment 
+#attenuation (SA)
+edges_PP_3_GC <- QPress::model.dia("marsh_PP_3_GC.dia")
+
+## Examine unweighted adjacency matrix
+Adj_Matrix <- adjacency.matrix(edges_PP_3_GC)
+Adj_Matrix
+
+## Adjaceny Matrix looks good, now use the function to generate the community matrix
+Com_Matrix <- community.sampler(edges_PP_3_GC)
+
+## Now create a function to check the validation condition.  In this case, the validation conditions of this model includes the novel perturbation of Fiddler Crabs and negative effects of the FC on Spartina and Sediment Attenuation
+press <- press.validate(edges_PP_3_GC,
+                        perturb=c("Fiddler Crab" = 1),
+                        monitor=c("Fiddler Crab" = 1))
+
+## Function to define the perturbation scenario
+impact <- press.impact(edges_PP_3_GC, perturb = c("Fiddler Crab" = 1,
+                                                  "Spartina" = 1,
+                                                  "Primary Production" = 1))
+
+## Use 10000 simulations
+n.sims <- 10000
+results <- 0
+i <- 0
+while(i < n.sims) {
+  
+  ## Randomly choose edges to retain
+  z <- Com_Matrix$select(runif(1))
+  
+  ## Sample community matrix
+  W <- Com_Matrix$community()
+  
+  ## Check press condition and stability
+  if(!(press(W) && stable.community(W))) next
+  
+  ## Monitor impact post press
+  imp <- impact(W)
+  results <- results + outer(sign(imp),-1:1,'==')
+  i <- i+1
+}
+
+## Print results
+rownames(results) <- levels(edges_PP_3_GC$From)
+colnames(results) <- c('-','0','+')
+results
+
+```
+
+```{r plotted outcomes for positive scenario - Primary Production, cache=TRUE,eval=FALSE}
+## Plot outcomes
+library(RColorBrewer)
+pal <- brewer.pal(n=5,"RdBu")[4:2]
+opar <- par(mar=c(5,10,5,5)+0.1)
+prop <- results/rowSums(results)
+r <- colSums(t(prop)*(-1:1))
+barplot(t(prop[order(r),]),
+        horiz=T,cex.names=0.9,cex.axis=0.9,las=2,border=F,col=pal,xlab="Proportion")
+
+```
+
